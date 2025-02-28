@@ -1,0 +1,74 @@
+import java.util.Scanner;
+class DigitalBanking 
+{
+  private long balance;
+
+    public DigitalBanking(long initialBalance) 
+		{
+        this.balance = initialBalance;
+        }
+         public void checkBalance()
+	      {
+        System.out.println("Your Current Balance is: $" + balance);
+         }
+
+    public void withdrawAmount(long amount) 
+		{
+        if (amount > balance) 
+			{
+            System.out.println("Insufficient Balance!!!");
+        } else 
+			{
+            balance -= amount;
+            System.out.println("$" + amount + " Withdrawn Successfully.");
+            checkBalance();
+            }
+        }
+
+    public void depositAmount(double amount) 
+		{
+        balance += amount;
+        System.out.println("$" + amount + " Deposited successfully.");
+        checkBalance();
+        }
+
+    public static void main(String[] args) 
+		{
+        Scanner sc = new Scanner(System.in);
+        DigitalBanking account = new DigitalBanking(50000.0);
+
+        while (true) 
+			{
+            System.out.println("\nWelcome to Digital Banking");
+            System.out.println("1. Check Balance");
+            System.out.println("2. Withdraw Amount");
+            System.out.println("3. Deposit Amount");
+            System.out.println("4. Exit");
+            System.out.print("Choose an option: ");
+
+            int choice = sc.nextInt();
+
+            switch (choice) 
+				{
+                case 1:
+                    account.checkBalance();
+                    break;
+                case 2:
+                    System.out.print("Enter Amount to Withdraw: ");
+                    double withdrawAmount = sc.nextDouble();
+                    account.withdrawAmount(withdrawAmount);
+                    break;
+                case 3:
+                    System.out.print("Enter Amount to Deposit: ");
+                    double depositAmount = sc.nextDouble();
+                    account.depositAmount(depositAmount);
+                    break;
+                case 4:
+                    System.out.println("Thank you for using Digital Banking. Goodbye!");
+                    return;
+                default:
+                    System.out.println("Invalid option. Please try again.");
+            }
+        }
+    }
+}
